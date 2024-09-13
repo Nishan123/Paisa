@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1050678610297",
+    "project_id": "paisa-f3bac",
+    "storage_bucket": "paisa-f3bac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050678610297:android:121b473a96b8a040d607a8",
+        "android_client_info": {
+          "package_name": "com.paisa.paisa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050678610297-1colclpvb8p0h7leftbul5pjc90f526b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.paisa.paisa",
+            "certificate_hash": "69d50f5e39524ac3f71647ba7e956fd19f7d1f27"
+          }
+        },
+        {
+          "client_id": "1050678610297-c9s1t9qk3o7dknud60atgdu81bjuud48.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4dDrDJH6Lsn82_EjfenpBLocS2IJ0hdY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050678610297-c9s1t9qk3o7dknud60atgdu81bjuud48.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1050678610297-073bahni3i906snqm81l54cbflum2hev.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.paisa.paisa"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
