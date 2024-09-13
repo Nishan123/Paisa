@@ -24,6 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
     "Expenses",
     "Transfer",
   ];
+  double availableBalance = 0.0;
+  double totalIncome = 0.0;
+  double totalExpenses = 0.0;
+
   final String userId = FirebaseAuth.instance.currentUser!.uid;
 
   @override
@@ -45,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Row(
               children: [
                 CircleAvatar(
-                  radius: 30,
+                  radius: 28,
                   child: Icon(Icons.person),
                 ),
                 SizedBox(
@@ -57,13 +61,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       "Hi 👋,",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       "Username",
-                      style: TextStyle(fontSize: 20, color: Colors.black54),
+                      style: TextStyle(fontSize: 18, color: Colors.black54),
                     ),
                   ],
                 )
@@ -72,8 +76,55 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 10,
             ),
-            const HeroCard(
-                availableBalance: 100.00, income: 0.00, expenses: 300.00),
+            FutureBuilder<QuerySnapshot>(
+              future: DatabaseMethods().getHeroData(userId),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Center(
+                    child: Text("Some error occurred"),
+                  );
+                } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return const Center(
+                    child: Text("No transactions found"),
+                  );
+                }
+
+                final transactionList = snapshot.data!.docs;
+                double incomeSum = 0.0;
+                double expenseSum = 0.0;
+
+                for (var doc in transactionList) {
+                  final transaction = doc.data() as Map<String, dynamic>;
+                  final transactionType = transaction["transaction type"];
+                  final amount = double.parse(transaction["amount"].toString());
+
+                  if (transactionType == "Income") {
+                    incomeSum += amount;
+                  } else {
+                    expenseSum += amount;
+                  }
+                }
+
+                totalIncome = incomeSum;
+                totalExpenses = expenseSum;
+                availableBalance = totalIncome - totalExpenses;
+
+                return HeroCard(
+                  availableBalance: availableBalance,
+                  income: totalIncome,
+                  expenses: totalExpenses,
+                );
+              },
+            ),
+
+            // HeroCard(
+            //     availableBalance: availableBalance,
+            //     income: totalIncome,
+            //     expenses: totalExpenses),
             const Text("Transactions"),
             ChipsChoice.single(
               wrapped: true,

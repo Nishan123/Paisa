@@ -16,10 +16,15 @@ class HeroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      height: 180,
+      height: 160,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          color: Colors.pink, borderRadius: BorderRadius.circular(20)),
+          gradient: const LinearGradient(
+            colors: [Colors.pink, Colors.lightBlue],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight
+          ),
+          borderRadius: BorderRadius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -32,9 +37,7 @@ class HeroCard extends StatelessWidget {
             style: const TextStyle(
                 color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(
-            height: 35,
-          ),
+          const Spacer(),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,

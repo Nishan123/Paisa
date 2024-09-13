@@ -91,7 +91,6 @@ class _SignupScreenState extends State<SignupScreen> {
                             passwordController.text,
                             context,
                           );
-                          DatabaseMethods().initializeUserData();
                         },
                         text: 'Sign up',
                       ),

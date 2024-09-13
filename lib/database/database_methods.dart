@@ -156,35 +156,15 @@ class DatabaseMethods {
     }
   }
 
-  Stream<QuerySnapshot> getBalance() {
-    return FirebaseFirestore.instance.collection("transactions").snapshots();
+  Future<QuerySnapshot> getHeroData(String userId) async {
+    return await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userId)
+        .collection("transactions")
+        .get();
   }
 
-  Future<void> initializeUserData() async {
-    // Get the current user
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      // Reference to the user's document
-      DocumentReference userDoc =
-          FirebaseFirestore.instance.collection('users').doc(user.uid);
-
-      // Check if user data exists
-      DocumentSnapshot docSnapshot = await userDoc.get();
-
-      if (!docSnapshot.exists) {
-        // If not exists, initialize with default values
-        await userDoc.set({
-          'totalIncome': 0,
-          'totalExpenses': 0,
-          'availableBalance': 0,
-        });
-        print("User data initialized for the first time.");
-      } else {
-        print("User data already exists.");
-      }
-    } else {
-      print("No user is signed in.");
-    }
+  Stream<QuerySnapshot> getBalance() {
+    return FirebaseFirestore.instance.collection("transactions").snapshots();
   }
 }

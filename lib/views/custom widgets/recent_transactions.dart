@@ -41,11 +41,11 @@ class RecentTransactions extends StatelessWidget {
                 ),
                 Text(
                   date,
-                  style: TextStyle(color: Colors.black54),
+                  style: const TextStyle(color: Colors.black54, fontSize: 12),
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -58,7 +58,7 @@ class RecentTransactions extends StatelessWidget {
                 ),
                 Text(
                   time,
-                  style: const TextStyle(color: Colors.black54),
+                  style: const TextStyle(color: Colors.black54, fontSize: 12),
                 )
               ],
             )
